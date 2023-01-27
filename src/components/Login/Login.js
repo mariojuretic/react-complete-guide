@@ -41,15 +41,18 @@ const Login = (props) => {
     isValid: null,
   });
 
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+
   useEffect(() => {
     const identifier = setTimeout(() => {
-      setFormIsValid(emailState.isValid && passwordState.isValid);
+      setFormIsValid(emailIsValid && passwordIsValid);
     }, 500);
 
     return () => {
       clearTimeout(identifier);
     };
-  }, [emailState.isValid, passwordState.isValid]);
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
@@ -77,7 +80,7 @@ const Login = (props) => {
       <form onSubmit={submitHandler}>
         <div
           className={`${styles.control} ${
-            emailState.isValid === false ? styles.invalid : ""
+            emailIsValid === false ? styles.invalid : ""
           }`}
         >
           <label htmlFor="email">E-Mail</label>
@@ -91,7 +94,7 @@ const Login = (props) => {
         </div>
         <div
           className={`${styles.control} ${
-            passwordState.isValid === false ? styles.invalid : ""
+            passwordIsValid === false ? styles.invalid : ""
           }`}
         >
           <label htmlFor="password">Password</label>
