@@ -1,6 +1,8 @@
 import styles from "./Button.module.css";
 
 const Button = (props) => {
+  console.log("Button COMPONENT RUNNING");
+
   return (
     <button
       type={props.type || "button"}
