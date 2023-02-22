@@ -1,8 +1,7 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const SimpleInput = () => {
   const [enteredName, setEnteredName] = useState("");
-  const nameInputRef = useRef();
 
   const nameInputChangeHandler = (event) => {
     setEnteredName(event.target.value);
@@ -11,13 +10,12 @@ const SimpleInput = () => {
   const formSubmissionHandler = (event) => {
     event.preventDefault();
 
+    if (enteredName.trim() === "") {
+      return;
+    }
+
     console.log(enteredName);
-
-    const enteredValue = nameInputRef.current.value;
-    console.log(enteredValue);
-
     setEnteredName("");
-    // nameInputRef.current.value = ""; => NOT IDEAL, DON'T MANIPULATE THE DOM
   };
 
   return (
@@ -29,7 +27,6 @@ const SimpleInput = () => {
           id="name"
           onChange={nameInputChangeHandler}
           value={enteredName}
-          ref={nameInputRef}
         />
       </div>
       <div className="form-actions">
