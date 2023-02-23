@@ -7,25 +7,36 @@ import styles from "./AvailableMeals.module.css";
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState();
 
   useEffect(() => {
     const fetchMeals = async () => {
-      const response = await fetch(
-        "https://react-http-ced8b-default-rtdb.firebaseio.com/meals.json"
-      );
-      const responseData = await response.json();
+      try {
+        const response = await fetch(
+          "https://react-http-ced8b-default-rtdb.firebaseio.com/meals.json"
+        );
 
-      let loadedMeals = [];
-      for (const key in responseData) {
-        loadedMeals.push({
-          id: key,
-          name: responseData[key].name,
-          description: responseData[key].description,
-          price: responseData[key].price,
-        });
+        if (!response.ok) {
+          throw new Error("Something went wrong!");
+        }
+
+        const responseData = await response.json();
+
+        let loadedMeals = [];
+        for (const key in responseData) {
+          loadedMeals.push({
+            id: key,
+            name: responseData[key].name,
+            description: responseData[key].description,
+            price: responseData[key].price,
+          });
+        }
+
+        setMeals(loadedMeals);
+      } catch (err) {
+        setHttpError(err.message);
       }
 
-      setMeals(loadedMeals);
       setIsLoading(false);
     };
 
@@ -36,6 +47,14 @@ const AvailableMeals = () => {
     return (
       <section className={styles["meals-loading"]}>
         <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (httpError) {
+    return (
+      <section className={styles["meals-error"]}>
+        <p>{httpError}</p>
       </section>
     );
   }
