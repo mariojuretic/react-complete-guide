@@ -26,7 +26,9 @@ const App = () => {
       return;
     }
 
-    dispatch(saveCartToDatabase(cart));
+    if (cart.changed) {
+      dispatch(saveCartToDatabase(cart));
+    }
   }, [cart, dispatch]);
 
   return (
