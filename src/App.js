@@ -5,7 +5,7 @@ import Layout from "./components/Layout/Layout";
 import Cart from "./components/Cart/Cart";
 import Products from "./components/Shop/Products";
 import Notification from "./components/UI/Notification";
-import { saveCartToDatabase } from "./store/cart-slice";
+import { saveCartToDatabase } from "./store/cart-actions";
 
 let isInitial = true;
 
