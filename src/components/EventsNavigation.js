@@ -1,15 +1,15 @@
-import styles from "./MainNavigation.module.css";
+import styles from "./EventsNavigation.module.css";
 
-const MainNavigation = () => {
+const EventsNavigation = () => {
   return (
     <header className={styles.header}>
       <nav>
         <ul className={styles.list}>
           <li>
-            <a>Home</a>
+            <a href="/events">All Events</a>
           </li>
           <li>
-            <a>Events</a>
+            <a href="/events/new">New Event</a>
           </li>
         </ul>
       </nav>
@@ -17,4 +17,4 @@ const MainNavigation = () => {
   );
 };
 
-export default MainNavigation;
+export default EventsNavigation;
