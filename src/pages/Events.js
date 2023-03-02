@@ -9,6 +9,8 @@ const EventsPage = () => {
   return <EventsList events={events} />;
 };
 
+export default EventsPage;
+
 export const loader = async () => {
   const response = await fetch("http://localhost:8080/events");
 
@@ -18,5 +20,3 @@ export const loader = async () => {
     return response;
   }
 };
-
-export default EventsPage;

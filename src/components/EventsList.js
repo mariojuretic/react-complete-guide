@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import styles from "./EventsList.module.css";
 
 const EventsList = ({ events }) => {
@@ -7,13 +9,13 @@ const EventsList = ({ events }) => {
       <ul className={styles.list}>
         {events.map((event) => (
           <li key={event.id} className={styles.item}>
-            <a href="...">
+            <Link to={event.id}>
               <img src={event.image} alt={event.title} />
               <div className={styles.content}>
                 <h2>{event.title}</h2>
                 <time>{event.date}</time>
               </div>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
