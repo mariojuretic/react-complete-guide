@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 import styles from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
@@ -6,10 +8,25 @@ const MainNavigation = () => {
       <nav>
         <ul className={styles.list}>
           <li>
-            <a>Home</a>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? styles.active : undefined
+              }
+              end
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <a>Events</a>
+            <NavLink
+              to="/events"
+              className={({ isActive }) =>
+                isActive ? styles.active : undefined
+              }
+            >
+              Events
+            </NavLink>
           </li>
         </ul>
       </nav>
