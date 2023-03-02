@@ -8,4 +8,15 @@ const EventsPage = () => {
   return <EventsList events={events} />;
 };
 
+export const loader = async () => {
+  const response = await fetch("http://localhost:8080/events");
+
+  if (!response.ok) {
+    // ...
+  } else {
+    const responseData = await response.json();
+    return responseData.events;
+  }
+};
+
 export default EventsPage;
