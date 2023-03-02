@@ -10,10 +10,10 @@ const EventsPage = () => {
 };
 
 export const loader = async () => {
-  const response = await fetch("http://localhost:8080/events");
+  const response = await fetch("http://localhost:8080/eventsss");
 
   if (!response.ok) {
-    // ...
+    throw new Error({ message: "Could not fetch events." });
   } else {
     return response;
   }
