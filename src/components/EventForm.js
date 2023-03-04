@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Form } from "react-router-dom";
 
 import styles from "./EventForm.module.css";
 
@@ -10,7 +10,7 @@ const EventForm = ({ method, event }) => {
   };
 
   return (
-    <form className={styles.form}>
+    <Form method="post" className={styles.form}>
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -57,7 +57,7 @@ const EventForm = ({ method, event }) => {
         </button>
         <button>Save</button>
       </div>
-    </form>
+    </Form>
   );
 };
 
