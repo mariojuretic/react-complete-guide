@@ -1,8 +1,14 @@
-import { useNavigate, Form, useNavigation } from "react-router-dom";
+import {
+  useNavigate,
+  Form,
+  useNavigation,
+  useActionData,
+} from "react-router-dom";
 
 import styles from "./EventForm.module.css";
 
 const EventForm = ({ method, event }) => {
+  const data = useActionData();
   const navigate = useNavigate();
   const navigation = useNavigation();
 
@@ -14,6 +20,13 @@ const EventForm = ({ method, event }) => {
 
   return (
     <Form method="post" className={styles.form}>
+      {data && data.errors && (
+        <ul>
+          {Object.values(data.errors).map((err) => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+      )}
       <p>
         <label htmlFor="title">Title</label>
         <input
