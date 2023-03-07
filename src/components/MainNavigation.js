@@ -39,6 +39,16 @@ const MainNavigation = () => {
               Newsletter
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/auth"
+              className={({ isActive }) =>
+                isActive ? styles.active : undefined
+              }
+            >
+              Authentication
+            </NavLink>
+          </li>
         </ul>
       </nav>
       <NewsletterSignup />
