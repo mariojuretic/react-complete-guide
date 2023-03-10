@@ -41,7 +41,7 @@ const MainNavigation = () => {
           </li>
           <li>
             <NavLink
-              to="/auth"
+              to="/auth?mode=login"
               className={({ isActive }) =>
                 isActive ? styles.active : undefined
               }
