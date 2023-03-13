@@ -9,6 +9,7 @@ import {
 
 import EventItem from "../components/EventItem";
 import EventsList from "../components/EventsList";
+import { getAuthToken } from "../util/auth";
 
 const EventDetailPage = () => {
   const { event, events } = useRouteLoaderData("event-detail");
@@ -71,8 +72,14 @@ export const loader = async ({ request, params }) => {
 
 export const action = async ({ request, params }) => {
   const id = params.eventId;
+
+  const token = getAuthToken();
+
   const response = await fetch("http://localhost:8080/events/" + id, {
     method: "DELETE",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
   });
 
   if (!response.ok) {
