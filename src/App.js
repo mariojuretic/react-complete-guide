@@ -1,9 +1,11 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import HomePage from "./pages/Home";
-import BlogPage, { loader as postsLoader } from "./pages/Blog";
-import PostPage, { loader as postLoader } from "./pages/Post";
 import RootLayout from "./pages/Root";
+
+const BlogPage = lazy(() => import("./pages/Blog"));
+const PostPage = lazy(() => import("./pages/Post"));
 
 const router = createBrowserRouter([
   {
@@ -19,13 +21,23 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <BlogPage />,
-            loader: postsLoader,
+            element: (
+              <Suspense fallback={<p>Loading...</p>}>
+                <BlogPage />
+              </Suspense>
+            ),
+            loader: (meta) =>
+              import("./pages/Blog").then((module) => module.loader(meta)),
           },
           {
             path: ":id",
-            element: <PostPage />,
-            loader: postLoader,
+            element: (
+              <Suspense fallback={<p>Loading...</p>}>
+                <PostPage />
+              </Suspense>
+            ),
+            loader: (meta) =>
+              import("./pages/Post").then((module) => module.loader(meta)),
           },
         ],
       },
